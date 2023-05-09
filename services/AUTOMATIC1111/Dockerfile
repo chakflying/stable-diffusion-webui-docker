@@ -27,6 +27,9 @@ ENV DEBIAN_FRONTEND=noninteractive PIP_PREFER_BINARY=1
 
 RUN apt-get update && apt install fonts-dejavu-core rsync git jq moreutils aria2 -y && apt-get clean
 
+# Support Mikubill/sd-webui-controlnet
+RUN apt-get update && apt install pkg-config libcairo2-dev build-essential libgl1 -y && apt-get clean
+
 RUN --mount=type=cache,target=/cache --mount=type=cache,target=/root/.cache/pip \
   aria2c -x 5 --dir /cache --out torch-2.0.0-cp310-cp310-linux_x86_64.whl -c \
   https://download.pytorch.org/whl/cu118/torch-2.0.0%2Bcu118-cp310-cp310-linux_x86_64.whl && \
